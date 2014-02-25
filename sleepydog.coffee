@@ -9,7 +9,7 @@ class SleepyDog
   constructor: (@robot) ->
     @dog_host = 'api.github.com'
     @dog_path = '/repositories/17177621/contents/images'
-    @image_path = 'https://raw.github.com/kellym/sleepydog/'
+    @image_path = 'https://raw.github.com/kellym/sleepydog/master/'
     @https = require 'https'
     @http = require 'http'
     @images = []
@@ -20,7 +20,7 @@ class SleepyDog
 
   loadSleepyDog: ->
     data = ''
-    @https.get { host: @dog_host, path: @dog_path}, (res) =>
+    @https.get { host: @dog_host, path: @dog_path, headers: { 'User-Agent': 'Hubot'  } }, (res) =>
       res.on 'data', (chunk) =>
         data += chunk.toString()
       res.on 'end', () =>
